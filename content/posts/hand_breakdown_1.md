@@ -1,5 +1,5 @@
 ---
-title: "Hand Breakdown #1 - 12/23/2025"
+title: "Hand Breakdown #1"
 date: 2025-12-23
 draft: false
 ---
@@ -53,7 +53,7 @@ Stackoff thresholds in 3b pots are much lower than in SRPs, because the stack-to
 Take a simple toy example using the board above:
 <span style="color: black;">J♣</span> <span style="color: red;">T♥</span> <span style="color: red;">6♥</span> 
 
-Consider a 0.5 SPR, and the following ranges, with range 1 first to act
+Consider a 0.5 SPR, and the following ranges, with range 1 first to act:
 
 Range 1: <span style="color: black;">A♠</span><span style="color: black;">J♠</span>
 
@@ -66,7 +66,7 @@ It turns out that simply shoving is much better than geometric size, because all
 ## Back to the actual hand
 
 Without having looked at these boards thoroughly before, my assumption was that the opponent's range was quite tight and centered around 2 regions:
-1. Vulnerable high-equity made hands: <span style="color: black;">A♠</span><span style="color: black;">J♠</span> / <span style="color: red;">Q♥</span><span style="color: red;">Q♦</span>. 
+1. Vulnerable high-equity made hands: <span style="color: black;">A♠</span><span style="color: black;">J♠</span> / <span style="color: red;">Q♥</span><span style="color: red;">Q♦</span>
 2. High-equity unmade hands: <span style="color: black;">K♠</span><span style="color: black;">Q♠</span> / <span style="color: red;">A♥</span><span style="color: red;">5♥</span>
 
 I thought hero was going to need to call a reasonably wide fraction of their range despite facing this shove, including all Jx, flush draws, and a healthy smattering of hands <= second pair. Specifically, the task in this hand is to decide whether we should prefer calling this or calling second pair. If you buy my above depiction of villian's range, this makes my exact hand (<span style="color: black;">A♠</span><span style="color: red;">Q♥</span>) look extremely intriguing as a bluff catch! It:
@@ -93,7 +93,7 @@ Despite flush draws being higher equity against our Jx pairs that are going to c
 
 # The result?
 
-I called (I'm a station), Villian shows <span style="color: black;">A♦</span><span style="color: red;">Q♠</span>
+I called (I'm a station), Villian shows <span style="color: red;">A♦</span><span style="color: black;">J♠</span>
 
 We run it twice and chop. Boring.
 
