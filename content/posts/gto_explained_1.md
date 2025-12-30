@@ -66,31 +66,31 @@ This also seems fine. We win no matter what, and can't get any MORE ev by checki
 
 Wait! We win 0 units if we check, but if we bet, we know that our opponent's current strategy is to fold, so we'd win the full pot = 1 unit. So we should actually always bet QQ!
 
-Let's reiterate our nash from Player 2's perspective now. We check and always face a bet. Given Player 1's new strategy, we know that he has QQ 50% of the time and AA 50% of the time. Our EV for a fold is 0. Our EV for a call is $(0.5 \times 2 + 0.5 \times (-1)) = 0.5 > 0$. So now **player 2 should always call**! (Our opponent is *overbluffing*).
+Let's reiterate our nash from Player 2's perspective now. We check and always face a bet. Given Player 1's new strategy, we know that he has QQ 50% of the time and AA 50% of the time. Our EV for a fold is 0. Our EV for a call is \\((0.5 \times 2 + 0.5 \times (-1)) = 0.5 > 0\\). So now **player 2 should always call**! (Our opponent is *overbluffing*).
 
 It turns out that the adjustments we are making above are simply too large, but a solver will use a very similar iterative process (using something called Counterfactual Regret Minimization) to converge on an equilibrium. Here we can use the principle of indifference to produce a Nash. Simply, KK needs to call at a frequency that makes QQ indifferent between bluffing and giving up, and QQ needs to bluff at a frequency that makes KK indifferent between calling (**bluff catching**) and folding.
 
 KK EV for folding is 0. So we want to compute QQ bluff freq such that:
 
-$$\text{KK}_\text{ev\_fold} = \text{KK}_\text{ev\_call}$$
+\\[\text{KK}_\text{ev\_fold} = \text{KK}_\text{ev\_call}\\]
 
-$$0 = \text{KK}_\text{ev\_call}$$
+\\[0 = \text{KK}_\text{ev\_call}\\]
 
-$$0 = \left(\text{frac\_facing\_AA\_given\_p1\_bets} \times (-1) + \text{frac\_facing\_QQ\_given\_p1\_bets} \times 2\right)$$
+\\[0 = \left(\text{frac\_facing\_AA\_given\_p1\_bets} \times (-1) + \text{frac\_facing\_QQ\_given\_p1\_bets} \times 2\right)\\]
 
-$$0 = \frac{1}{1 + \text{QQ\_bluff\_freq}} \times (-1) + \frac{\text{QQ\_bluff\_freq}}{1 + \text{QQ\_bluff\_freq}} \times 2$$
+\\[0 = \frac{1}{1 + \text{QQ\_bluff\_freq}} \times (-1) + \frac{\text{QQ\_bluff\_freq}}{1 + \text{QQ\_bluff\_freq}} \times 2\\]
 
-We can do some simple algebra here and get $\text{QQ\_bluff\_freq} = 0.5$.
+We can do some simple algebra here and get \\(\text{QQ\_bluff\_freq} = 0.5\\).
 
 If player 1 was losing money by bluffing QQ though, they simply wouldn't do it. So we can compute KK call freq similarly:
 
-$$\text{QQ}_\text{ev\_giveup} = \text{QQ}_\text{ev\_bluff}$$
+\\[\text{QQ}_\text{ev\_giveup} = \text{QQ}_\text{ev\_bluff}\\]
 
-$$0 = \text{QQ}_\text{ev\_bluff}$$
+\\[0 = \text{QQ}_\text{ev\_bluff}\\]
 
-$$0 = \text{frac\_facing\_fold} \times 1 + \text{frac\_facing\_call} \times (-1)$$
+\\[0 = \text{frac\_facing\_fold} \times 1 + \text{frac\_facing\_call} \times (-1)\\]
 
-And again, $\text{KK\_call\_freq} = 0.5$.
+And again, \\(\text{KK\_call\_freq} = 0.5\\).
 
 Our first Nash! p2 checks, p1 bets AA always and QQ half the time, and p2 calls KK half the time.
 
@@ -100,17 +100,17 @@ The solution we came to above is a direct function of the SPR. When Player 1 use
 
 **Minimum Defense Frequency (MDF):** The minimum frequency a player must defend in order to make the opponent indifferent to bluffing with any two cards.
 
-$$\text{MDF} = \frac{\text{Pot}}{\text{Pot} + \text{Bet}} = \frac{1}{1 + \text{Bet Size as fraction of pot}}$$
+\\[\text{MDF} = \frac{\text{Pot}}{\text{Pot} + \text{Bet}} = \frac{1}{1 + \text{Bet Size as fraction of pot}}\\]
 
-In our toy game: $\text{MDF} = \frac{1}{1+1} = 0.5 = 50\%$.
+In our toy game: \\(\text{MDF} = \frac{1}{1+1} = 0.5 = 50\%\\).
 
 This is exactly the frequency KK called at! If KK called any less, QQ could bluff always and be profitable. If it called any more, QQ would never want to bluff.
 
 **Bluff-To-Value Ratio:** To make the caller indifferent between calling and folding, we derive a similar equation for player 1:
 
-$$\frac{\text{Bluffs}}{\text{Value}} = \frac{\text{Bet}}{\text{Pot + Bet}}$$
+\\[\frac{\text{Bluffs}}{\text{Value}} = \frac{\text{Bet}}{\text{Pot + Bet}}\\]
 
-In our toy game, with a pot-sized bet: $\frac{\text{Bluffs}}{\text{Value}} = \frac{1}{1+1} = \frac{1}{2}$, so we need 1 bluff for every 2 value combos. Player 1 has 1 value combo (AA) and therefore needs 0.5 bluff combos. They can achieve this by simply betting QQ half the time.
+In our toy game, with a pot-sized bet: \\(\frac{\text{Bluffs}}{\text{Value}} = \frac{1}{1+1} = \frac{1}{2}\\), so we need 1 bluff for every 2 value combos. Player 1 has 1 value combo (AA) and therefore needs 0.5 bluff combos. They can achieve this by simply betting QQ half the time.
 
 **Examples with different bet sizes:**
 
@@ -152,7 +152,7 @@ There are a number of insightful takeaways from this relatively simple game.
     - EV is zero-sum here, and must sum to what's currently in the pot. A bluff-catcher has 0 EV, so the opponent must be making the entire pot in EV with their range when you have a bluff-catching hand.
 
 5. **A more subtle follow-on: polar ranges have better equity realization than condensed ranges.**
-    - Equity realization: $\text{EQR} = \frac{\text{EV\_as\_frac\_of\_pot}}{\text{equity}}$
+    - Equity realization: \\(\text{EQR} = \frac{\text{EV\_as\_frac\_of\_pot}}{\text{equity}}\\)
     - What were the EVs of the nash strategies above? 
         - **EV:** Player 1: 0.75, Player 2: 0.25.
         - **EQR:** Player 1: 150%, Player 2: 50%.
@@ -209,7 +209,7 @@ There are two valid things you could say though:
 
 **4. Let's make this far more complicated. I'm going to give the player's equal ranges, more hands, and more bet sizing options. The river will still be a 10 SPR spot.**
 
-Woahh this gets a lot more complicated. But at its core the solution represents something similar to what we talked about. The "nutted" hands start by trapping. The weaker but still strong hands bet a size that forces the opponent to bluff catch with hands they beat. The mediocre hands check, hoping to get to showdown, with the plan to face a bluff-catching spot if they must. The weakest hands either give up or bluff. The game tree is actually pretty deep here, but I'll just show you the first Player 2 node, and what Player 1's response looks like facing the smallest bet.
+Okay, this starts to look a lot more intricate. But at its core the solution is a more sophisticated version of the simple Nash we come up with before. The "nutted" hands often trap, expecting to face bets enough from other strong hands and force them into a bluff-catching spot after a check-raise. The non-nutted but still strong hands bet a size that forces the opponent to bluff catch with hands they beat. The mediocre hands check, hoping to get to showdown, with the plan to face a bluff-catching spot if they must. And the weakest hands either give up or choose bluff. The game tree is actually pretty deep here, but I'll just show you the first Player 2 node, and what Player 1's response looks like facing the smallest bet.
 
 ![toygame4_1](/images/gto_explained_1/toygame4_1.png)
 
@@ -219,6 +219,6 @@ Woahh this gets a lot more complicated. But at its core the solution represents 
 
 # What next?
 
-All this was pretty neat but maybe doesn't give that much practical advice on what to do in any hands yet. Nevertheless, these concepts are so foundational that I think it makes sense as the first of the 25 hours of study, and I'll focus on more practical advice for the next 24 of them!
+All this was pretty neat but doesn't give that much practical advice on what to do in any hands yet. Nevertheless, these concepts are so foundational that I think it makes sense as the first of the 25 hours of study, and I'll pivot to focusing on some more practical advice going forward.
 
-*Bring a man a cookie, and you feed him for a session. Teach a man to play poker, and hopefully he can lure other fish to his poker sessions with cookies **he** provides in the future.*
+*Bring a man a cookie, and you feed him for a session. Teach a man some poker, and perhaps he'll get some chips too!*
