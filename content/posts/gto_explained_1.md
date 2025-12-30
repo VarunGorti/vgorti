@@ -4,67 +4,72 @@ date: 2025-12-29
 draft: false
 ---
 
-The boys are going to Vegas! (In theory, as long as we get our act together soon and plan it). And since poker might actually be one of the least degenerate things one can do in Vegas, it makes sense to study up and prepare to become a crusher. Multiple people have asked me recently about the most effective way to do some poker cramming in a reasonably short amount of time (say 25 hours). Despite receiving this question many times, it's always been surprisingly difficult for me to answer.
+The boys are going to Vegas! (In theory, as long as we get our act together soon and plan it). And since poker might actually be one of the least degenerate things one can do in Vegas, it makes sense to study up and prepare to become a crusher. A few people have asked me recently about the most effective way to do some poker cramming in a reasonably short amount of time (say 25 hours). Despite receiving this question many times, it's always been surprisingly difficult for me to answer.
 
-I strongly believe that the best way to get better at poker *in the long run* is to just study with some kind of solver. (There's a whole separate debate about theory vs exploits, but I won't get into it here. My personal opinion is that you need an understanding of theory anyways in order to know how to deviate, but I digress). But "learn to copy the solver" is an approach that is slow, takes a while to get decent payoff, and can be pretty unintuitive. You should be able to supplement this study by first learning some simple frameworks and heuristics that help you interpret solver outputs and generally think about the game. So I turned to YouTube to try to find some good materials.
+I strongly believe that the best way to get better at poker *in the long run* is to just study **GTO** (Game Theory Optimal) poker with some kind of solver. (There's a whole separate debate about theory vs exploits, which I won't get into here). But "learn to copy the solver" is an approach that is slow, takes a while to realize decent payoff, and can be pretty unintuitive. It feels like one should be able to supplement this study by first learning some simple frameworks and heuristics that help interpret solver outputs and generally think about the game. So I turned to YouTube to try to find some good materials.
 
-I was disappointed. One unfortunate reality about the poker ecosystem is that good instruction like this is hard to come by. The most easily accessible form of poker content comes in the form of vloggers who are hardly even serious players. Alternatively, there is a decent amount of content from high-stakes online pros, but they are complicated and assume their viewers have a lot of background knowledge. Even those claiming to tailor to "low stakes online players" will be targeting people who have spent a decent amount of time on poker. When your experience thinking about EV is mostly centered around comparing the price of a box of Costco cookies to your buy-in, it's not so productive to spend a lot of time talking about blockers in some arcane spot.
+I was disappointed. One unfortunate reality about the poker ecosystem is that good instruction like this is hard to come by. The most easily accessible form of poker content comes in the form of vloggers who are hardly even serious players. Alternatively, there is a decent amount of content from high-stakes online pros, but is is complicated and usually assumes viewers have a lot of background knowledge. Even channels claiming to tailor to "low stakes online players" will be targeting people who have spent a decent amount of time on poker. When your experience thinking about EV is mostly centered around comparing the price of a box of Costco cookies to your buy-in, it's not so productive to spend a lot of time talking about blockers in some arcane spot.
 
-Nevertheless, the trip must go on, and poker is more fun when you're winning, so I started doing a little thinking about how to simply and intuitively introduce some core game theory concepts. The hope is that building up from foundational theory can turn beginners into winning $1/$2 players with a relatively small amount of up-front time investment. I think this isn't as lofty a goal as it sounds, because I truly believe the average low stakes live player is pretty awful. The only thing you must understand in order to follow the rest of the post are the rules of poker. Let's jump in:
+Nevertheless, the trip must go on, and poker is more fun when you're winning, so I started doing a little thinking about how to simply and intuitively introduce some core game theory concepts. The hope is that building up from foundational theory can turn beginners into winning \$1/\$2 players with a relatively small amount of up-front time investment. I think this isn't as lofty a goal as it sounds, because I truly believe the average low stakes live player is pretty awful. The only thing you must understand in order to follow the rest of the post are the rules of poker. Let's jump in:
 
 ---
 
 # Toy Game #1
 
-I'm going to start with poker's most classic toy game. It's not an overstatement to say that this is the foundation of all poker GTO; I think everyone trying to get better at poker should try to understand it thoroughly.
+I'm going to start with poker's most classic toy game. It's not an overstatement to say that this is the foundation of all of poker game thoery; I think everyone trying to learn GTO must first understand this thoroughly.
 
-**Range 1 (IP):** AA, QQ. A *range* refers to hands a player could possibly have in some spot, along with the relative probabilities that they have each of those hands. In this case, this means that Player 1 has either AA or QQ randomly with 50% probability.
-
-**Range 2 (OOP):** KK
-
+Let's define two ranges, for Ivey in-position (IP) and Oscar out-of-position (OOP).
+\
 *(IP = In Position = last to act, OOP = Out Of Position = first to act)*
 
-**SPR:** 1 
+**Ivey's IP Range':** AA, QQ. 
+\
+A *range* refers to hands a player could possibly have in some spot, along with the relative probabilities that they have each of those hands. In this case, this means that Ivey has either AA or QQ randomly with 50% probability.
 
-SPR = stack to pot ratio. With 2 players in the pot, this refers to the *effective stack*, which is the smaller of the two players. If player 1 has 100 chips, player 2 has 200 chips, and the pot is 100 chips, the SPR is 100/100 = 1. SPR is the fundamental way you should think about bet sizing and the pot in poker, and usually dominates dollars (awful) or even big-blinds.
+**Oscar's OOP Range:** KK
+
+
+**SPR:** 1 
+\
+SPR = stack to pot ratio. With two players in the pot, this refers to the *effective stack*, which is the lesser of the players' stacks. If player 1 has 100 chips, player 2 has 200 chips, and the pot is 100 chips, the SPR is 100/100 = 1. SPR is the fundamental way you should think about bet sizing and the pot in poker, and almost always dominates dollars (awful) or even big-blinds.
 
 **Board:** 22233
 
-Let's think through the Nash for these two players.
+The definition of a **Nash Equilibrium** is that no party can gain EV by unilaterally changing their strategy, given that the opposing strategies are fixed/known. Let's think through the Nash for these two players.
 
-**Player 2 starts. What should they do?**
+**Oscar starts. What should he do?**
 
-It's pretty trivial to see that **Player 2 should start by checking**. Player 1 knows what they have and gets to act with perfect information; if they bet, player 1 simply gets to fold QQ and call AA. So by betting, Player 2 makes the pot bigger *only when they are behind*, which is bad.
+It's pretty trivial to see that **Oscar should start by checking**. Ivey knows what Oscar has and gets to act with perfect information; if Oscar bets, Ivey simply gets to fold QQ and call AA. So by betting, Oscar makes the pot bigger *only when he is behind*, which is bad. So Oscar checks.
 
-**Now facing a check, what should Player 1 do?**
+**Facing a check, what should Ivey do?**
 
-With AA, Player 1 should bet. They know they are winning, and Player 2 might call if they bet! Compare this to check, which wins one unit, and is the same as the "bad" case where they bet and player 2 folds (so player 1 still wins one unit).
+With AA, Ivey should bet. He knows he is winning, and maybe Oscar will call a bet! This strictly dominates check, as the situation where Oscar folds is functionally the same as Ivey just deciding to check back.
 
-Now what should they do with QQ? Suppose player 1 has the thought "well I know I'm behind, so I'm just going to check behind and lose." Player 1 checks behind, loses the pot, and takes a bite of their Costco cookie.
+Now what should Ivey do with QQ? Suppose Ivey has the thought "well I know I have the worse hand, so I'm just going to give up here." Ivey checks behind, loses the pot, and takes a bite of his Costco cookie.
 
 Let's pause at this iteration of strategies:
 
-- **Player 2:** starts by checking 
-- **Player 1:** Bets AA, Checks QQ
-- **Player 2:** Facing a bet → Player 1 has AA → we lose → always fold.
+- **Oscar:** starts by checking 
+- **Ivey:** Bets AA, Checks QQ
+- **Oscar:** Facing a bet → Ivey has AA → Oscar loses → always fold.
 
 Note that regardless, no more money is going into the pot. It's functionally the same as both players flipping over their hands at the start, with each winning 50% of the time.
 
-The definition of a Nash is that no party can gain EV by unilaterally changing their strategy, given that the opposing strategies are fixed/known. Let's consider the scenario we outlined above more carefully.
+Let's consider the scenario we outlined above more carefully and try to determine if it's a Nash. We need to consider whether anyone has incentive to unilaterally change strategies with any hand.
 
-> **Player 2: starts by checking**
+> **Oscar: starts by checking**
 
 This makes sense, we established earlier that betting is bad.
 
-> **Player 1: Bets AA**
+> **Ivey: Bets AA**
 
 This also seems fine. We win no matter what, and can't get any MORE ev by checking behind.
 
-> **Player 1: Checks QQ**
+> **Ivey: Checks QQ**
 
 Wait! We win 0 units if we check, but if we bet, we know that our opponent's current strategy is to fold, so we'd win the full pot = 1 unit. So we should actually always bet QQ!
 
-Let's reiterate our nash from Player 2's perspective now. We check and always face a bet. Given Player 1's new strategy, we know that he has QQ 50% of the time and AA 50% of the time. Our EV for a fold is 0. Our EV for a call is \\((0.5 \times 2 + 0.5 \times (-1)) = 0.5 > 0\\). So now **player 2 should always call**! (Our opponent is *overbluffing*).
+Let's reiterate our nash from Oscar's perspective now. We check and always face a bet. Given Ivey's new strategy, we know that he has QQ 50% of the time and AA 50% of the time. Our EV for a fold is 0. Our EV for a call is \\((0.5 \times 2 + 0.5 \times (-1)) = 0.5 > 0\\). So now **we should always call**! (Our opponent is *overbluffing*).
 
 It turns out that the adjustments we are making above are simply too large, but a solver will use a very similar iterative process (using something called Counterfactual Regret Minimization) to converge on an equilibrium. Here we can use the principle of indifference to produce a Nash. Simply, KK needs to call at a frequency that makes QQ indifferent between bluffing and giving up, and QQ needs to bluff at a frequency that makes KK indifferent between calling (**bluff catching**) and folding.
 
@@ -88,7 +93,7 @@ $$
 
 We can do some simple algebra here and get $\text{QQ\_bluff\_freq} = 0.5$.
 
-If player 1 was losing money by bluffing QQ though, they simply wouldn't do it. So we can compute KK call freq similarly:
+We also know that Oscar must make Ivey indifferent between betting and checking QQ in order for this to be a Nash. Otherwise, Ivey would have incentive to deviate towards whichever action was better with his hand! So we can compute Oscar's KK call frequency similarly:
 
 $$
 QQ_{\text{ev\_giveup}} = \text{QQ}_{\text{ev\_bluff}}
@@ -102,25 +107,29 @@ $$
 0 = P(\text{fold} \mid \text{p1 bluffs}) \times 1 + P(\text{call} \mid \text{p1 bluffs}) \times (-1)
 $$
 
-And again, $\text{KK\_call\_freq} = 0.5$.
+Solving, $\text{KK\_call\_freq} = 0.5$.
+
+---
 
 ## Framework: Minimum Defense Frequency and Bluff-To-Value Ratio
 
-The solution we came to above is a direct function of the SPR. When Player 1 uses a pot-sized bet, Player 2 must call half the time to make their bluffs indifferent.
+The solution we came to above is a direct function of the SPR. When Ivey uses a pot-sized bet, Oscar must call half the time to make the opponent's bluffs indifferent.
 
 **Minimum Defense Frequency (MDF):** The minimum frequency a player must defend in order to make the opponent indifferent to bluffing with any two cards.
 
 \\[\text{MDF} = \frac{\text{Pot}}{\text{Pot} + \text{Bet}} = \frac{1}{1 + \text{Bet Size as fraction of pot}}\\]
 
-In our toy game: \\(\text{MDF} = \frac{1}{1+1} = 0.5 = 50\%\\).
+In our toy game: \\(\text{MDF} = \frac{1}{1+1} = 0.5 = 50%\\).
 
 This is exactly the frequency KK called at! If KK called any less, QQ could bluff always and be profitable. If it called any more, QQ would never want to bluff.
 
-**Bluff-To-Value Ratio:** To make the caller indifferent between calling and folding, we derive a similar equation for player 1:
+**Bluff-To-Value Ratio:** To make the caller indifferent between calling and folding, we derive a similar equation for Ivey:
 
 \\[\frac{\text{Bluffs}}{\text{Value}} = \frac{\text{Bet}}{\text{Pot + Bet}}\\]
 
-In our toy game, with a pot-sized bet: \\(\frac{\text{Bluffs}}{\text{Value}} = \frac{1}{1+1} = \frac{1}{2}\\), so we need 1 bluff for every 2 value combos. Player 1 has 1 value combo (AA) and therefore needs 0.5 bluff combos. They can achieve this by simply betting QQ half the time.
+In our toy game, with a pot-sized bet: \\(\frac{\text{Bluffs}}{\text{Value}} = \frac{1}{1+1} = \frac{1}{2}\\), so we need 1 bluff for every 2 value combos. Ivey has 1 value combo (AA) and therefore needs 0.5 bluff combos. He can achieve this by simply betting QQ half the time.
+
+Intuitively, these are two sides of the same coin, and are just fancy ways of describing the Nash frequencies.
 
 **Examples with different bet sizes:**
 
@@ -130,7 +139,7 @@ In our toy game, with a pot-sized bet: \\(\frac{\text{Bluffs}}{\text{Value}} = \
 - **2x pot bet:** MDF = 33%, Bluffs:Value = 2:3 (40% bluffs, 60% value)
 - **Infinite bet:** MDF = epsilon, Bluffs:Value = 1:1 (50% bluffs, 50% value)
 
-Larger bets are paired with higher bluff frequencies, and also lower calling frequencies. But your perfectly polar hands still make more money by betting large in theory! This is a general pattern that is important to remember.
+Larger bets are paired with higher bluff frequencies, and also result in lower calling frequencies. But hands with 100% equity still make more money by betting large in theory! This is a general pattern that is important to remember.
 
 **And the solver confirms our solution:**
 
@@ -168,9 +177,9 @@ There are a number of insightful takeaways from this relatively simple game.
 5. **A more subtle follow-on: polar ranges have better equity realization than condensed ranges.**
     
     - What were the Equity/EVs of the ranges given our Nash strategies above? 
-        - **Equity:** Player 1: 50% Player 2: 50%.
-        - **EV:** Player 1: 0.75, Player 2: 0.25.
-        - **EQR:** Player 1: 150%, Player 2: 50%.
+        - **Equity:** Ivey: 50% Oscar: 50%.
+        - **EV:** Ivey: 0.75, Oscar: 0.25.
+        - **EQR:** Ivey: 150%, Oscar: 50%.
         
         That's interesting... both players had the same equity, but one has much larger EV! more on this in a bit.
 
@@ -190,7 +199,7 @@ I came up with a few illustrative extensions of this toy game, each of which hig
 
 ![toygame2_2](/images/gto_explained_1/toygame2_2.png)
 
-Remember our observation about EQR? When we get deeper, Player 1's EV has increased to a whopping 95% of the pot (up from 75% with SPR 1), and they now bluff QQ nearly always! Facing this bet, the optimal strategy is for Player 2 to call only ~9% of the time.
+Remember our observation about EQR? When we get deeper, Ivey's EV has increased to a whopping 95% of the pot (up from 75% with SPR 1), and he now bluffs QQ nearly always! Facing this bet, the optimal strategy is for Oscar to call only ~9% of the time.
 
 **Takeaway 1:** The larger the stack-to-pot-ratio, the more EV a polar range will have against a condensed one. It becomes more important for OOP to have "traps" as we get deeper and deeper.
 
@@ -198,23 +207,23 @@ Remember our observation about EQR? When we get deeper, Player 1's EV has increa
 
 **Takeaway 3:** Value hands bet a size according to their equity. Bluffs simply choose the same size as the value hands.
 
-**3. Player 2 was pretty miserable in the previous example. Maybe traps are good? Let's stick to 10 SPR, but check what happens if Player 2 protects their range and has some traps. Let's add a sliver of AA (chops) to their range. I added AA to player 2's range with 10% the weight of KK.**
+**3. Oscar was pretty miserable in the previous example. Maybe traps are good? Let's stick to 10 SPR, but check what happens if Oscar protects his range and has some traps. I added a sliver of AA chops to Oscar's range, with 10% the weight of KK.**
 
-We should intuitively realize that it still wouldn't make sense for Player 2 to bet AA, and should still begin with a check. What would be the point? The opponent would never call QQ!
+We should realize intuitively that it still wouldn't make sense for Oscar to bet AA. What would be the point? The opponent would never call QQ!
 
 ![toygame3_1](/images/gto_explained_1/toygame3_1.png)
 
-If you still restrict Player 1 to playing a shove or check strategy, their EV completely plummets.
+If you still restrict Ivey to playing a shove or check strategy, his EV completely plummets.
 
 ![toygame3_2](/images/gto_explained_1/toygame3_2.png)
 
 ![toygame3_3](/images/gto_explained_1/toygame3_3.png)
 
-They're not even always betting AA here, because it's only getting called by the opponent's AA, and QQ is bluffing sometimes but is forced to give up a lot. Given that the opponent needs to defend about 9% of the time vs a 10x pot shove, and they have AA 9% of the time, the bet size player 1 is using is just too big for their equity!
+You'll notice that he is actually indifferent to betting AA here! Given that Oscar only needs to defend about 9% of the time vs a 10x pot shove to make QQ indifferent, and he holds AA 9% of the time, Ivey never gets paid off by KK. This is really bad for his EV, and means that this 10x pot shove is larger than optimal for this scenario!
 
 If you let the solver pick the size it wants, it starts using a 3x pot size bet instead. This smaller size forces the opponent to start defending KK, lets us bet AA always, and is the "right" size based on our equity of 90%. Our EV is back up to 72% of the initial pot (note how the tiny frequency of traps reduced this from 95% earlier, though!).
 
-**Takeaway 1:** Why does GTO have traps? It gives us some "easy defends" and prevents the opponent's range from being perfectly polar. You'll sometimes hear poker players say things like "I thought my opponent was underprotected in this line, so I bluffed". **This isn't a valid thought process!!** There's nothing at all that stops your opponent from calling with a bluff catcher if they believe you are just overbluffing. They absolutely do not need traps to stop you from overbluffing.
+**Takeaway 1:** Why does GTO have traps? It gives us some "easy defends" and prevents the opponent's range from being perfectly polar. You'll sometimes hear poker players say things like "I thought my opponent was underprotected in this line, so I bluffed". **This isn't a valid thought process!!** There's nothing at all that stops your opponent from calling with a bluff catcher if they believe you are just overbluffing. They absolutely do not need traps in order to just flick in a call and punish an overbluff.
 
 There *are* two other valid things you could say though:
 
@@ -224,7 +233,7 @@ There *are* two other valid things you could say though:
 
 **4. Let's make our sim just a bit more realistic. I'm going to give the player's equal ranges, more hands, and more bet sizing options. The river will still be a 10 SPR spot.**
 
-Okay, this starts to look a lot more complicated. But at its core the solution is just a more sophisticated version of the simple Nash we come up with before. The "nutted" hands often trap, expecting to face bets enough from other strong hands and force them into a bluff-catching spot after a check-raise. The non-nutted but still strong hands bet a size that forces the opponent to bluff catch with hands they beat. The mediocre hands check, hoping to get to showdown, with the plan to face a bluff-catching spot if they must. And the weakest hands either give up or choose bluff. The game tree is actually kind of sprawling here, but I'll just show you the first Player 2 node, and what Player 1's response looks like facing the smallest bet.
+Okay, this starts to look a lot more complicated. But at its core the solution is just a more sophisticated version of the simple Nash we come up with before. The "nutted" hands often trap, expecting to face bets enough from other strong hands and force them into a bluff-catching spot after a check-raise. The non-nutted but still strong hands bet a size that forces the opponent to bluff catch with hands they beat. The mediocre hands check, hoping to get to showdown, with the plan to face a bluff-catching spot if they must. And the weakest hands either give up or choose bluff. The game tree is actually kind of sprawling here, but I'll just show you the first Oscar node, and what Ivey's response looks like facing the smallest bet.
 
 ![toygame4_1](/images/gto_explained_1/toygame4_1.png)
 
@@ -232,10 +241,12 @@ Okay, this starts to look a lot more complicated. But at its core the solution i
 
 Note there's also a big difference between being in position vs out of position. In position closes the action, so they don't need to be as worried about "protecting" their middling checking hands and also don't gain anything by trapping the nuts. This is actually a much more central poker concept than it seems, and we'll revisit this at some point.
 
+*Note: I may come back to this post and add some more examples, but I think it's getting a bit long already. Potentially they'll come never or in a later page.*
+
 ---
 
 # What next?
 
-All this was pretty neat, but it's a little contrived. The above examples use weird ranges and focus on river decisions only, and thus don't shed much light on what we should actually do in our real hands. Nevertheless, these concepts are so foundational that I think it was still worth spending some of our precious 25 hours of study time on, and I'll pivot to focusing on some more practical advice going forward.
+All this was pretty neat, but it's a little contrived. The above examples use weird ranges and focus on river decisions only, and thus don't shed much light on how we should play real hands. Nevertheless, these concepts are so foundational that I think it was still worth spending some of our precious 25 hours of study time on, and I'll pivot to focusing on some more practical advice going forward.
 
 *Give a man a cookie, and you feed him for a session. Teach a man some poker, and maybe next time he'll provide the snacks!*
