@@ -4,15 +4,13 @@ date: 2025-12-29
 draft: false
 ---
 
-The boys are going to Vegas! (In theory, as long as we get our act together soon and plan it). And since poker might actually be one of the least degenerate things one can do in Vegas, it makes sense to study and up and prepare to become a crusher.
+The boys are going to Vegas! (In theory, as long as we get our act together soon and plan it). And since poker might actually be one of the least degenerate things one can do in Vegas, it makes sense to study up and prepare to become a crusher. Multiple people have asked me recently about the most effective way to do some poker cramming in a reasonably short amount of time (say 25 hours). Despite receiving this question many times, it's always been surprisingly difficult for me to answer.
 
-Multiple people have asked me recently about how to do some poker cramming in a reasonably short amount of time (say 25 hours). Despite receiving this question many times, it's always been surprisingly difficult for me to answer.
+I strongly believe that the best way to get better at poker *in the long run* is to just study with some kind of solver. (There's a whole separate debate about theory vs exploits, but I won't get into it here. My personal opinion is that you need an understanding of theory anyways in order to know how to deviate, but I digress). But "learn to copy the solver" is an approach that is slow, takes a while to get decent payoff, and can be pretty unintuitive. You should be able to supplement this study by first learning some simple frameworks and heuristics that help you interpret solver outputs and generally think about the game. So I turned to YouTube to try to find some good materials.
 
-I strongly believe that the best way to get better at poker *in the long run* is to just study with some kind of solver. (There's a whole separate debate about theory vs exploits, but I won't get into it here. My personal opinion is that you need an understanding of theory anyways in order to know how to deviate, but I digress). GTOBase is a great free version, and if you're looking to be more serious GTOWizard is expensive but top-of-the-line for it's node-locking capabilities and flexible solutions. But "learn to copy the solver" is an approach that is slow, takes a while to get decent payoff, and can be pretty unintuitive. You should be able to supplement this study by first learning some simple frameworks and heuristics that help you interpret solver outputs and generally think about the game. So I turned to YouTube to try to find some good materials.
+I was disappointed. One unfortunate reality about the poker ecosystem is that good instruction like this is hard to come by. The most easily accessible form of poker content comes in the form of vloggers who are hardly even serious players. Alternatively, there is a decent amount of content from high-stakes online pros, but they are complicated and assume their viewers have a lot of background knowledge. Even those claiming to tailor to "low stakes online players" will be targeting people who have spent a decent amount of time on poker. When your experience thinking about EV is mostly centered around comparing the price of a box of Costco cookies to your buy-in, it's not so productive to spend a lot of time talking about blockers in some arcane spot.
 
-I was disappointed. One unfortunate reality about the poker ecosystem is that most "pros" just aren't that good. The main thing required to buy into high stakes games is a lot of money, not a lot of skill, and so live pros are able to make a living by playing extremely simplistic strategies and owning wealthy fish. But even these pros don't have a lot of incentive to reveal their strategies (they're often playing an extremely exploitative brand of poker). The most easily accessible form of poker content comes in the form of vloggers who I doubt are even winning players (ahem Rampage). One should watch these videos only for laughs and for prime examples of what not to do. Alternatively, there's a lot more educational content from online crushers, but they are complicated and suppose a lot of background knowledge in their viewers. (For examples of the type of content I'm talking about, there's this channel called Schroedinger's VPIP I recently stumbled across. I doubt that people without a lot of time in the solver would get much out of it at all, but I think the explanations and analysis are very high quality). Even ones claiming to tailor to "low stakes online players" will be targeting people not unlike myself who have spent a decent amount of time on poker. When your experience thining about EV is mostly centered around comparing the price of a box of Costco cookies to your buy-in, it's not so productive to spend a lot of time talking about blockers in some arcane spot.
-
-Nevertheless, the trip must go on, and poker is more fun when you're winning, so I started doing a little thinking about how to introduce core game theory concepts in the most tangible way possible. The hope is to turn my friends into winning $1/$2 players with a relatively small amount of up-front time investment. I think this isn't as lofty a goal as it sounds, because I truly believe the average $1/$2 player is pretty awful. The only thing you must understand in order to follow the rest of the post are the rules of poker. Let's jump in:
+Nevertheless, the trip must go on, and poker is more fun when you're winning, so I started doing a little thinking about how to simply and intuitively introduce some core game theory concepts. The hope is that building up from foundational theory can turn beginners into winning $1/$2 players with a relatively small amount of up-front time investment. I think this isn't as lofty a goal as it sounds, because I truly believe the average low stakes live player is pretty awful. The only thing you must understand in order to follow the rest of the post are the rules of poker. Let's jump in:
 
 ---
 
@@ -148,30 +146,35 @@ Larger bets are paired with higher bluff frequencies, and also lower calling fre
 
 There are a number of insightful takeaways from this relatively simple game.
 
-1. **Bluff-catcher:** Any hand that beats all of your opponent's bluffs and loses to all of their value. Traditionally refers to hands on the river, because equities are not so binary on earlier streets (you might have a draw, for example).
+1. **Some quick definitions first:**
+    - **Equity:** How often a hand/range would win if both player's just flipped over their cards right now and dealt out the rest of the board.
+    - **Equity realization:** \\(\text{EQR} = \frac{\text{EV\_as\_frac\_of\_pot}}{\text{equity}}\\)
+    - **Polar:** Ranges that contain hands with either very high or very low equity vs the opponent's range. In this example, AA had 100% equity and QQ had 0%.
+    - **Condensed:** Opposite of polar; ranges that contain hands with very middling equity. In this example, KK had 50% equity.
+    - **Bluff-catcher:** Any hand that beats all of your opponent's bluffs and loses to all of their value. Traditionally refers to hands on the river, because equities are not so binary on earlier streets (you might have a draw, for example).
+
+2. **Bluff Catching**
     - Against balanced ranges, bluff-catchers are indifferent between calling and folding. In order for this to be true, calling must be 0 EV.
     - I put this at the top because it is the most important. The first question to ask when you have a bluff-catcher is: do I think my opponent is over or under-bluffing? If you have a clear answer to that question, stop all further thought processes and either pure call or pure fold your hand.
 
-2. **There are no loss leaders in poker.**
+3. **There are no loss leaders in poker.**
     - Hands mix actions only when they are indifferent between those two actions. If KK were to start calling 1% less, QQ would snap towards bluffing **always**, not just slightly more often. You would repeat the equations I set up comparing the EV of bluffing vs giving up and discover that one is just strictly better.
 
-3. **Some quick definitions first:**
-    - **Equity:** How often a hand/range would win if both player's just flipped over their cards right now and dealt out the rest of the board.
-    - **Polar:** Ranges that contain hands with either very high or very low equity vs the opponent's range. In this example, AA had 100% equity and QQ had 0%.
-    - **Condensed:** Opposite of polar; ranges that contain hands with very middling equity. In this example, KK had 50% equity.
+
 
 4. **Reducing your opponent's hand to a bluff-catcher is equivalent to winning the entirety of what's currently in the pot.**
     - EV is zero-sum here, and must sum to what's currently in the pot. A bluff-catcher has 0 EV, so the opponent must be making the entire pot in EV with their range when you have a bluff-catching hand.
 
 5. **A more subtle follow-on: polar ranges have better equity realization than condensed ranges.**
-    - Equity realization: \\(\text{EQR} = \frac{\text{EV\_as\_frac\_of\_pot}}{\text{equity}}\\)
-    - What were the EVs of the nash strategies above? 
+    
+    - What were the Equity/EVs of the ranges given our Nash strategies above? 
+        - **Equity:** Player 1: 50% Player 2: 50%.
         - **EV:** Player 1: 0.75, Player 2: 0.25.
         - **EQR:** Player 1: 150%, Player 2: 50%.
         
-        That's interesting... more on this in a bit.
+        That's interesting... both players had the same equity, but one has much larger EV! more on this in a bit.
 
-6. **Strategy:**
+6. **Who should bet?**
     - Polar ranges/hands have an incentive to put money into the pot. In some sense they are at an information advantage and get to play "perfectly".
     - Condensed ranges/hands have an incentive to keep the small pot and get to showdown. They're at an information disadvantage and have to "play defense".
 
@@ -187,7 +190,7 @@ I came up with a few illustrative extensions of this toy game, each of which hig
 
 ![toygame2_2](/images/gto_explained_1/toygame2_2.png)
 
-Player 1's EV has increased to a whopping 95% of the pot (up from 75% with SPR 1), and they now bluff QQ nearly always! Facing this bet, the optimal strategy is for Player 2 to call only ~9% of the time.
+Remember our observation about EQR? When we get deeper, Player 1's EV has increased to a whopping 95% of the pot (up from 75% with SPR 1), and they now bluff QQ nearly always! Facing this bet, the optimal strategy is for Player 2 to call only ~9% of the time.
 
 **Takeaway 1:** The larger the stack-to-pot-ratio, the more EV a polar range will have against a condensed one. It becomes more important for OOP to have "traps" as we get deeper and deeper.
 
@@ -195,7 +198,7 @@ Player 1's EV has increased to a whopping 95% of the pot (up from 75% with SPR 1
 
 **Takeaway 3:** Value hands bet a size according to their equity. Bluffs simply choose the same size as the value hands.
 
-**3. Player 2 was pretty miserable in the previous example. Maybe traps are good? Let's keep this 10 SPR, but check what happens if Player 2 protects their range and has some traps. Let's add a sliver of AA (chops) to their range. I added AA to player 2's range with 10% the weight of KK.**
+**3. Player 2 was pretty miserable in the previous example. Maybe traps are good? Let's stick to 10 SPR, but check what happens if Player 2 protects their range and has some traps. Let's add a sliver of AA (chops) to their range. I added AA to player 2's range with 10% the weight of KK.**
 
 We should intuitively realize that it still wouldn't make sense for Player 2 to bet AA, and should still begin with a check. What would be the point? The opponent would never call QQ!
 
@@ -209,7 +212,7 @@ If you still restrict Player 1 to playing a shove or check strategy, their EV co
 
 They're not even always betting AA here, because it's only getting called by the opponent's AA, and QQ is bluffing sometimes but is forced to give up a lot. Given that the opponent needs to defend about 9% of the time vs a 10x pot shove, and they have AA 9% of the time, the bet size player 1 is using is just too big for their equity!
 
-If you let the solver pick the size it wants, it starts using a 3x pot size bet instead. This forces the opponent to start defending KK, lets us bet AA always, and is the right size based on our equity of 90%. Our EV is back up to 72% of the initial pot (note how the tiny frequency of traps reduced this from 95% earlier, though!).
+If you let the solver pick the size it wants, it starts using a 3x pot size bet instead. This smaller size forces the opponent to start defending KK, lets us bet AA always, and is the "right" size based on our equity of 90%. Our EV is back up to 72% of the initial pot (note how the tiny frequency of traps reduced this from 95% earlier, though!).
 
 **Takeaway 1:** Why does GTO have traps? It gives us some "easy defends" and prevents the opponent's range from being perfectly polar. You'll sometimes hear poker players say things like "I thought my opponent was underprotected in this line, so I bluffed". **This isn't a valid thought process!!** There's nothing at all that stops your opponent from calling with a bluff catcher if they believe you are just overbluffing. They absolutely do not need traps to stop you from overbluffing.
 
@@ -219,18 +222,20 @@ There *are* two other valid things you could say though:
 
 2. I thought my opponent didn't have enough traps compared to theory, so I used a bigger size / bet with thinner value hands than the solver would. This allows me to force them into bluff-catching spots and thus win the whole pot in EV more often!
 
-**4. Let's make this far more complicated. I'm going to give the player's equal ranges, more hands, and more bet sizing options. The river will still be a 10 SPR spot.**
+**4. Let's make our sim just a bit more realistic. I'm going to give the player's equal ranges, more hands, and more bet sizing options. The river will still be a 10 SPR spot.**
 
-Okay, this starts to look a lot more intricate. But at its core the solution is a more sophisticated version of the simple Nash we come up with before. The "nutted" hands often trap, expecting to face bets enough from other strong hands and force them into a bluff-catching spot after a check-raise. The non-nutted but still strong hands bet a size that forces the opponent to bluff catch with hands they beat. The mediocre hands check, hoping to get to showdown, with the plan to face a bluff-catching spot if they must. And the weakest hands either give up or choose bluff. The game tree is actually kind of sprawling here, but I'll just show you the first Player 2 node, and what Player 1's response looks like facing the smallest bet.
+Okay, this starts to look a lot more complicated. But at its core the solution is just a more sophisticated version of the simple Nash we come up with before. The "nutted" hands often trap, expecting to face bets enough from other strong hands and force them into a bluff-catching spot after a check-raise. The non-nutted but still strong hands bet a size that forces the opponent to bluff catch with hands they beat. The mediocre hands check, hoping to get to showdown, with the plan to face a bluff-catching spot if they must. And the weakest hands either give up or choose bluff. The game tree is actually kind of sprawling here, but I'll just show you the first Player 2 node, and what Player 1's response looks like facing the smallest bet.
 
 ![toygame4_1](/images/gto_explained_1/toygame4_1.png)
 
 ![toygame4_2](/images/gto_explained_1/toygame4_2.png)
 
+Note there's also a big difference between being in position vs out of position. In position closes the action, so they don't need to be as worried about "protecting" their middling checking hands and also don't gain anything by trapping the nuts. This is actually a much more central poker concept than it seems, and we'll revisit this at some point.
+
 ---
 
 # What next?
 
-All this was pretty neat, but it's a little contrived. All the above examples use weird ranges and focus on river decisions only, and thus don't shed much light on what we should actually do in our real hands. Nevertheless, these concepts are so foundational that I think it was still worth spending some of our precious 25 hours of study time on, and I'll pivot to focusing on some more practical advice going forward.
+All this was pretty neat, but it's a little contrived. The above examples use weird ranges and focus on river decisions only, and thus don't shed much light on what we should actually do in our real hands. Nevertheless, these concepts are so foundational that I think it was still worth spending some of our precious 25 hours of study time on, and I'll pivot to focusing on some more practical advice going forward.
 
 *Give a man a cookie, and you feed him for a session. Teach a man some poker, and maybe next time he'll provide the snacks!*
