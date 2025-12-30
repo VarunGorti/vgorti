@@ -4,23 +4,23 @@ date: 2025-12-29
 draft: false
 ---
 
-The boys are going to Vegas! (In theory, as long as we get our act together soon and plan it). And since poker might actually be one of the least degenerate things one can do in Vegas, it makes sense to study and up and prepare to crush some fish.
+The boys are going to Vegas! (In theory, as long as we get our act together soon and plan it). And since poker might actually be one of the least degenerate things one can do in Vegas, it makes sense to study and up and prepare to become a crusher.
 
-Multiple people have asked me recently about how to do some cramming in a reasonably short amount of time (say 25 hours). Despite receiving this question many times, it's always been surprisingly difficult for me to answer.
+Multiple people have asked me recently about how to do some poker cramming in a reasonably short amount of time (say 25 hours). Despite receiving this question many times, it's always been surprisingly difficult for me to answer.
 
-I strongly believe that the best way to get better at poker *in the long run* is to just study with some kind of solver. (There's a whole separate debate here about theory vs exploit, but I won't get into it here. My personal opinion is that you need an understanding of theory anyways in order to know how to deviate, but I digress). GTOBase is a great free version, and if you're looking to be more serious GTOWizard is expensive but top-of-the-line for it's node-locking capabilities and such. But "learn to copy the solver" is an approach that is slow, takes a while to get decent payoff, and can be pretty unintuitive. You should be able to supplement this study by first learning some simple frameworks and heuristics that help you interpret solver outputs and generally think about the game. So I turned to YouTube to try to find some good materials.
+I strongly believe that the best way to get better at poker *in the long run* is to just study with some kind of solver. (There's a whole separate debate about theory vs exploits, but I won't get into it here. My personal opinion is that you need an understanding of theory anyways in order to know how to deviate, but I digress). GTOBase is a great free version, and if you're looking to be more serious GTOWizard is expensive but top-of-the-line for it's node-locking capabilities and flexible solutions. But "learn to copy the solver" is an approach that is slow, takes a while to get decent payoff, and can be pretty unintuitive. You should be able to supplement this study by first learning some simple frameworks and heuristics that help you interpret solver outputs and generally think about the game. So I turned to YouTube to try to find some good materials.
 
-I was disappointed. One unfortunate reality about the poker ecosystem is that most "pros" just aren't that good. The main thing required to buy into high stakes games is a lot of money, not a lot of skill, and so live pros are able to make a living by playing extremely simplistic strategies and owning wealthy fish. But even these pros don't have a lot of incentive to reveal their strategies (they're often playing an extremely exploitative brand of poker). The most easily accessible form of poker content comes in the form of vloggers who I doubt are even winning players (ahem Rampage). One should watch these videos only for laughs and for prime examples of what not to do. Alternatively, there's a lot more educational content from online crushers, but they are complicated and supposed a lot of background knowledge. (For examples of the type of content I'm talking about, there's this channel called Schroedinger's VPIP I recently stumbled across. I doubt that people without a lot of time in the solver would get much out of it at all, but I think the explanations and analysis are very high quality). Even ones claiming to tailor to "low stakes online players" will be targeting people not unlike myself who have spent a decent amount of time on poker. When your experience thining about EV is mostly centered around comparing the price of a box of Costco cookies to your buy-in, it's not so productive to spend a lot of time talking about blockers in some arcane spot.
+I was disappointed. One unfortunate reality about the poker ecosystem is that most "pros" just aren't that good. The main thing required to buy into high stakes games is a lot of money, not a lot of skill, and so live pros are able to make a living by playing extremely simplistic strategies and owning wealthy fish. But even these pros don't have a lot of incentive to reveal their strategies (they're often playing an extremely exploitative brand of poker). The most easily accessible form of poker content comes in the form of vloggers who I doubt are even winning players (ahem Rampage). One should watch these videos only for laughs and for prime examples of what not to do. Alternatively, there's a lot more educational content from online crushers, but they are complicated and suppose a lot of background knowledge in their viewers. (For examples of the type of content I'm talking about, there's this channel called Schroedinger's VPIP I recently stumbled across. I doubt that people without a lot of time in the solver would get much out of it at all, but I think the explanations and analysis are very high quality). Even ones claiming to tailor to "low stakes online players" will be targeting people not unlike myself who have spent a decent amount of time on poker. When your experience thining about EV is mostly centered around comparing the price of a box of Costco cookies to your buy-in, it's not so productive to spend a lot of time talking about blockers in some arcane spot.
 
-Nevertheless, the trip must go on, and poker is more fun when you're winning, so I started doing a little thinking about how to introduce core game theory concepts in the most tangible way possible. The goal is to turn my friends into winning $1/$2 players with a relatively small amount of up-front investment. I think this isn't as lofty a goal as it sounds, because I truly believe the average $1/$2 player is pretty awful. The only thing you must understand in order to follow the rest of the post are the rules of poker. Let's jump in:
+Nevertheless, the trip must go on, and poker is more fun when you're winning, so I started doing a little thinking about how to introduce core game theory concepts in the most tangible way possible. The hope is to turn my friends into winning $1/$2 players with a relatively small amount of up-front time investment. I think this isn't as lofty a goal as it sounds, because I truly believe the average $1/$2 player is pretty awful. The only thing you must understand in order to follow the rest of the post are the rules of poker. Let's jump in:
 
 ---
 
 # Toy Game #1
 
-I'm going to start with poker's most classic toy game. It's not an overstatement to say that this is the foundation of all poker GTO, and everyone trying to improve simply must understand it.
+I'm going to start with poker's most classic toy game. It's not an overstatement to say that this is the foundation of all poker GTO; I think everyone trying to get better at poker should try to understand it thoroughly.
 
-**Range 1 (IP):** AA, QQ. This means that Player 1 has either AA or QQ randomly with 50% probability.
+**Range 1 (IP):** AA, QQ. A *range* refers to hands a player could possibly have in some spot, along with the relative probabilities that they have each of those hands. In this case, this means that Player 1 has either AA or QQ randomly with 50% probability.
 
 **Range 2 (OOP):** KK
 
@@ -28,7 +28,7 @@ I'm going to start with poker's most classic toy game. It's not an overstatement
 
 **SPR:** 1 
 
-SPR = stack to pot ratio. With 2 players in the pot, this refers to the *effective stack*, which is the smaller of the two players. If player 1 has 100 chips, player 2 has 200 chips, and the pot is 100 chips, the SPR is 1. SPR is the fundamental way you should think about bet sizing and the pot in poker, and usually dominates dollars (awful) or even big-blinds.
+SPR = stack to pot ratio. With 2 players in the pot, this refers to the *effective stack*, which is the smaller of the two players. If player 1 has 100 chips, player 2 has 200 chips, and the pot is 100 chips, the SPR is 100/100 = 1. SPR is the fundamental way you should think about bet sizing and the pot in poker, and usually dominates dollars (awful) or even big-blinds.
 
 **Board:** 22233
 
@@ -72,27 +72,39 @@ It turns out that the adjustments we are making above are simply too large, but 
 
 KK EV for folding is 0. So we want to compute QQ bluff freq such that:
 
-\\[\text{KK}_\text{ev\_fold} = \text{KK}_\text{ev\_call}\\]
+$$
+KK_{\text{ev\_fold}} = \text{KK}_{\text{ev\_call}}
+$$
 
-\\[0 = \text{KK}_\text{ev\_call}\\]
+$$
+0 = \text{KK}_{\text{ev\_call}}
+$$
 
-\\[0 = \left(\text{frac\_facing\_AA\_given\_p1\_bets} \times (-1) + \text{frac\_facing\_QQ\_given\_p1\_bets} \times 2\right)\\]
+$$
+0 = P(\text{AA} \mid \text{p1 bets}) \times (-1) + P(\text{QQ} \mid \text{p1 bets}) \times 2
+$$
 
-\\[0 = \frac{1}{1 + \text{QQ\_bluff\_freq}} \times (-1) + \frac{\text{QQ\_bluff\_freq}}{1 + \text{QQ\_bluff\_freq}} \times 2\\]
+$$
+0 = \frac{1}{1 + \text{QQ\_bluff\_freq}} \times (-1) + \frac{\text{QQ\_bluff\_freq}}{1 + \text{QQ\_bluff\_freq}} \times 2
+$$
 
-We can do some simple algebra here and get \\(\text{QQ\_bluff\_freq} = 0.5\\).
+We can do some simple algebra here and get $\text{QQ\_bluff\_freq} = 0.5$.
 
 If player 1 was losing money by bluffing QQ though, they simply wouldn't do it. So we can compute KK call freq similarly:
 
-\\[\text{QQ}_\text{ev\_giveup} = \text{QQ}_\text{ev\_bluff}\\]
+$$
+QQ_{\text{ev\_giveup}} = \text{QQ}_{\text{ev\_bluff}}
+$$
 
-\\[0 = \text{QQ}_\text{ev\_bluff}\\]
+$$
+0 = \text{QQ}_{\text{ev\_bluff}}
+$$
 
-\\[0 = \text{frac\_facing\_fold} \times 1 + \text{frac\_facing\_call} \times (-1)\\]
+$$
+0 = P(\text{fold} \mid \text{p1 bluffs}) \times 1 + P(\text{call} \mid \text{p1 bluffs}) \times (-1)
+$$
 
-And again, \\(\text{KK\_call\_freq} = 0.5\\).
-
-Our first Nash! p2 checks, p1 bets AA always and QQ half the time, and p2 calls KK half the time.
+And again, $\text{KK\_call\_freq} = 0.5$.
 
 ## Framework: Minimum Defense Frequency and Bluff-To-Value Ratio
 
@@ -179,7 +191,7 @@ Player 1's EV has increased to a whopping 95% of the pot (up from 75% with SPR 1
 
 **Takeaway 1:** The larger the stack-to-pot-ratio, the more EV a polar range will have against a condensed one. It becomes more important for OOP to have "traps" as we get deeper and deeper.
 
-**Takeaway 2:** Remember, we win the whole pot whenever we bet. When we are perfectly polar (our value hands have 100% equity), our value hands will always bet, and our bluffs will bet with a frequency that makes the opponent indifferent to calling. We're giving them worse odds when we bet larger, so we get to bluff more often, so we make more of the pot.
+**Takeaway 2:** Remember, we win the whole pot whenever we bet. When we are perfectly polar (our value hands have 100% equity), our value hands will always bet, and our bluffs will bet with a frequency that makes the opponent indifferent to calling. We're giving them worse odds when we bet larger, so we get to bluff more often, which means we win the whole pot more often and thus generate more EV.
 
 **Takeaway 3:** Value hands bet a size according to their equity. Bluffs simply choose the same size as the value hands.
 
@@ -201,15 +213,15 @@ If you let the solver pick the size it wants, it starts using a 3x pot size bet 
 
 **Takeaway 1:** Why does GTO have traps? It gives us some "easy defends" and prevents the opponent's range from being perfectly polar. You'll sometimes hear poker players say things like "I thought my opponent was underprotected in this line, so I bluffed". **This isn't a valid thought process!!** There's nothing at all that stops your opponent from calling with a bluff catcher if they believe you are just overbluffing. They absolutely do not need traps to stop you from overbluffing.
 
-There are two valid things you could say though:
+There *are* two other valid things you could say though:
 
 1. I thought my opponent would fold enough that my bluffs make more money by betting than giving up (overfold). Self-explanatory.
 
-2. I thought my opponent didn't have enough traps compared to theory, so I used a bigger size than the solver would. This allows me to force them into bluff-catching spots and thus win the whole pot in EV more often!
+2. I thought my opponent didn't have enough traps compared to theory, so I used a bigger size / bet with thinner value hands than the solver would. This allows me to force them into bluff-catching spots and thus win the whole pot in EV more often!
 
 **4. Let's make this far more complicated. I'm going to give the player's equal ranges, more hands, and more bet sizing options. The river will still be a 10 SPR spot.**
 
-Okay, this starts to look a lot more intricate. But at its core the solution is a more sophisticated version of the simple Nash we come up with before. The "nutted" hands often trap, expecting to face bets enough from other strong hands and force them into a bluff-catching spot after a check-raise. The non-nutted but still strong hands bet a size that forces the opponent to bluff catch with hands they beat. The mediocre hands check, hoping to get to showdown, with the plan to face a bluff-catching spot if they must. And the weakest hands either give up or choose bluff. The game tree is actually pretty deep here, but I'll just show you the first Player 2 node, and what Player 1's response looks like facing the smallest bet.
+Okay, this starts to look a lot more intricate. But at its core the solution is a more sophisticated version of the simple Nash we come up with before. The "nutted" hands often trap, expecting to face bets enough from other strong hands and force them into a bluff-catching spot after a check-raise. The non-nutted but still strong hands bet a size that forces the opponent to bluff catch with hands they beat. The mediocre hands check, hoping to get to showdown, with the plan to face a bluff-catching spot if they must. And the weakest hands either give up or choose bluff. The game tree is actually kind of sprawling here, but I'll just show you the first Player 2 node, and what Player 1's response looks like facing the smallest bet.
 
 ![toygame4_1](/images/gto_explained_1/toygame4_1.png)
 
@@ -219,6 +231,6 @@ Okay, this starts to look a lot more intricate. But at its core the solution is 
 
 # What next?
 
-All this was pretty neat but doesn't give that much practical advice on what to do in any hands yet. Nevertheless, these concepts are so foundational that I think it makes sense as the first of the 25 hours of study, and I'll pivot to focusing on some more practical advice going forward.
+All this was pretty neat, but it's a little contrived. All the above examples use weird ranges and focus on river decisions only, and thus don't shed much light on what we should actually do in our real hands. Nevertheless, these concepts are so foundational that I think it was still worth spending some of our precious 25 hours of study time on, and I'll pivot to focusing on some more practical advice going forward.
 
-*Bring a man a cookie, and you feed him for a session. Teach a man some poker, and perhaps he'll get some chips too!*
+*Give a man a cookie, and you feed him for a session. Teach a man some poker, and maybe next time he'll provide the snacks!*
