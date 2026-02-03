@@ -16,15 +16,15 @@ Nevertheless, the trip must go on, and poker is more fun when you're winning, so
 
 # Toy Game #1
 
-I'm going to start with poker's most classic toy game. It's not an overstatement to say that this is the foundation of all of poker game thoery; I think everyone trying to learn GTO must first understand this thoroughly.
+I'm going to start with poker's most classic toy game. It's not an overstatement to say that this is the foundation of all of poker game theory; I think everyone trying to learn GTO must first understand this thoroughly.
 
-Let's define two ranges, for Ivey in-position (IP) and Oscar out-of-position (OOP).
+Let's define ranges for Ivey in-position (IP) and Oscar out-of-position (OOP).
 \
-*(IP = In Position = last to act, OOP = Out Of Position = first to act)*
+*(IP = In Position = last to act, OOP = Out of Position = first to act)*
 
 **Ivey's IP Range':** AA, QQ. 
 \
-A *range* refers to hands a player could possibly have in some spot, along with the relative probabilities that they have each of those hands. In this case, this means that Ivey has either AA or QQ randomly with 50% probability.
+A *range* refers to hands a player could possibly have in some spot, along with the relative probabilities that they have each of those hands. In this case, the above range means that Ivey has either AA or QQ randomly with 50% probability.
 
 **Oscar's OOP Range:** KK
 
@@ -39,13 +39,13 @@ The definition of a **Nash Equilibrium** is that no party can gain EV by unilate
 
 **Oscar starts. What should he do?**
 
-It's pretty trivial to see that **Oscar should start by checking**. Ivey knows what Oscar has and gets to act with perfect information; if Oscar bets, Ivey simply gets to fold QQ and call AA. So by betting, Oscar makes the pot bigger *only when he is behind*, which is bad. So Oscar checks.
+It's pretty trivial to see that **Oscar should start by checking**. Ivey knows what Oscar has and gets to act with perfect information; if Oscar bets, Ivey simply gets to fold QQ and call AA. So by betting, Oscar makes the pot bigger *only when he is going to lose*, which is bad. So Oscar checks.
 
 **Facing a check, what should Ivey do?**
 
-With AA, Ivey should bet. He knows he is winning, and maybe Oscar will call a bet! This strictly dominates check, as the situation where Oscar folds is functionally the same as Ivey just deciding to check back.
+With AA, Ivey should bet. He knows he is winning, and maybe Oscar will call a bet! This strictly dominates check, which would instead prevent Oscar from ever paying Ivey more chips.
 
-Now what should Ivey do with QQ? Suppose Ivey has the thought "well I know I have the worse hand, so I'm just going to give up here." Ivey checks behind, loses the pot, and takes a bite of his Costco cookie.
+Now what should Ivey do with QQ? Suppose for now that Ivey has the thought "well I know I have the worse hand, so I'm just going to give up here." Ivey checks behind, loses the pot, and takes a bite of his Costco cookie.
 
 Let's pause at this iteration of strategies:
 
@@ -53,23 +53,23 @@ Let's pause at this iteration of strategies:
 - **Ivey:** Bets AA, Checks QQ
 - **Oscar:** Facing a bet → Ivey has AA → Oscar loses → always fold.
 
-Note that regardless, no more money is going into the pot. It's functionally the same as both players flipping over their hands at the start, with each winning 50% of the time.
+Note that in all cases, no more money is going into the pot. The current set of strategies are functionally the same as both players flipping over their hands at the start and each winning 50% of the time.
 
-Let's consider the scenario we outlined above more carefully and try to determine if it's a Nash. We need to consider whether anyone has incentive to unilaterally change strategies with any hand.
+Let's consider the scenario we outlined above more carefully and try to determine if it's a Nash. We need to consider whether anyone has incentive to unilaterally change strategies with any part of their range.
 
 > **Oscar: starts by checking**
 
-This makes sense, we established earlier that betting is bad.
+No incentive for Oscar to deviate here, we established earlier that betting is bad.
 
 > **Ivey: Bets AA**
 
-This also seems fine. We win no matter what, and can't get any MORE ev by checking behind.
+This also seems fine. Ivey wins no matter what, and can't get any MORE ev by checking behind.
 
 > **Ivey: Checks QQ**
 
 Wait! We win 0 units if we check, but if we bet, we know that our opponent's current strategy is to fold, so we'd win the full pot = 1 unit. So we should actually always bet QQ!
 
-Let's reiterate our nash from Oscar's perspective now. We check and always face a bet. Given Ivey's new strategy, we know that he has QQ 50% of the time and AA 50% of the time. Our EV for a fold is 0. Our EV for a call is \\((0.5 \times 2 + 0.5 \times (-1)) = 0.5 > 0\\). So now **we should always call**! (Our opponent is *overbluffing*).
+Let's reiterate our nash from Oscar's perspective given Ivey's new deviation to bet QQ. We start by checking and always face a bet. Given Ivey's new strategy, we know that he has QQ 50% of the time and AA 50% of the time. Our EV of folding is 0. Our EV for a call is \\((0.5 \times 2 + 0.5 \times (-1)) = 0.5 > 0\\). So now **we should always call**! (Our opponent is *overbluffing*).
 
 It turns out that the adjustments we are making above are simply too large, but a solver will use a very similar iterative process (using something called Counterfactual Regret Minimization) to converge on an equilibrium. Here we can use the principle of indifference to produce a Nash. Simply, KK needs to call at a frequency that makes QQ indifferent between bluffing and giving up, and QQ needs to bluff at a frequency that makes KK indifferent between calling (**bluff catching**) and folding.
 
