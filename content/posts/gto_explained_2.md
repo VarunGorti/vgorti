@@ -4,7 +4,9 @@ date: 2026-02-02
 draft: false
 ---
 
-Disclaimer: I kinda just threw something together and haven't proofread or edited much yet, apologies for any typos or other mistakes.
+*Disclaimer: I kinda just threw something together and haven't proofread or edited much yet, apologies for any typos or other mistakes.*
+
+---
 
 Our trip is fast approaching, and I've been slacking on the blog posts. I started thinking about what topic I wanted to cover next, and in the process came to the conclusion that a little bit of preflop knowledge is a crucial building block to the more advanced concepts. We talked a little bit about how ranges influence actions, and this is no less true in real hands. The gist of my advice here is unfortunately just that it's worth spending some time memorizing hand charts, which you can look at for free on GTOWizard (I suggest using the 500NL rake structure with GTO sizings and just clicking through the game tree). You don't need to get things perfectly correct (if you're getting close you have spent too long!), but understanding and being able to replicate the broad shape of the ranges is important - the rest of this blog post will attempt to shed some light on *why* the solver is doing what it is doing preflop, and how we can use this information to make simple and effective deviations.
 
@@ -28,9 +30,9 @@ So what *are* we trying to do? Let's use some intuition built from my previous p
 
 Imagine a standard pre-flop spot as conceptually kind of similar to the final example in the previous post, where both players have a range with hands of varying strength (from 44 to AA). Like last time, we are trying to find a Nash. Instead of OOP playing a measured strategy where they bet their good hands, check their medium hands, bluff sometimes, and sprinkle in some traps, *they are forced to bet 1 BB all the time, blind, without checking their cards!*
 
-What do we want to do as IP?
+What should we do as IP?
 
-Well, they clearly just did something kind of dumb... what exactly did they mess up?
+Well, OOP clearly just did something kind of dumb... what exactly did they mess up?
 
 First of all, there was nothing in the pot when they made their bet. So they didn't have any incentive to "bluff" with their weaker hands. Putting in money with the equivalent of 44 feels like a mistake. Second, they bet with a bunch of medium strength hands that we can now try to force into a bluff catching spot. They also put in money with their strongest hands, which... actually seems good for them and not easy for us to punish. I suppose we should focus on the first two points. What should our response be?
 
@@ -46,7 +48,7 @@ When we open UTG in a 6-handed game, there are 5 people who might have really go
 
 ## There don't seem to be a lot of cold calls. Why?
 
-Cold-call: A call that does not close the action. Most commonly pre-flop these are either a call (not from the BB) vs an open, or a call vs a 3b that does not come from the initial raiser.
+**Cold-call**: A call that does not close the action (no idea if this is the precise definition). Most commonly pre-flop these are either a non-BB call vs an open, or a call vs a 3b that does not come from the initial raiser.
 
 Cold-calls are conceptually kind of similar to limps, in that they telegraph your hand strength a bit and force you into bluff-catching spots. Again, the tradeoff of playing these cold-call ranges and building in some traps just isn't worth it according to the solver, with the notable exception of the BTN and SB having large flatting ranges vs opens (other positions also mix these in as you take the rake towards 0). You lose very little EV by simply playing raise-or-fold from all positions other than the big blind, and that is the approach I would encourage readers of this blog to take. These spots are complicated and, in my opinion, not worth the study time to build intuition in. I myself am extremely understudied in these spots.
 
@@ -132,4 +134,4 @@ It feels very unintuitive, but against most non-whale players it will be losing 
 
 # Conclusion
 
-Hopefully the above were useful as guiding questions to try to understand the solver pre-flop charts. A little bit of memorization is somewhat mandatory, but I find the application to be much easier when you can pair it with some broad-strokes intuition. Again, the most important thing here is to understand what the pre-flop incentives are and have a rough idea of the ranges going into the flop. It's usually the case at all stages in a hand that the more accurately you can visualize both ranges, the more accurately you can play the hand. We're just trying to achieve reasonable poker-playing here (we just have to try to beat some soft live games), so I think a high-level outline is more than sufficient! I'll try to crank out a few more of these over the next couple weeks to complete the crash course (I'll optimistically aim for 5 in total), and we will hopefully at some point examine some actual hands!
+Hopefully the above were useful as guiding questions to try to understand the solver pre-flop charts. A little bit of memorization is somewhat mandatory, but I find the application to be much easier when you can pair it with some broad-strokes intuition. Again, the most important thing here is to understand what the pre-flop incentives are and have a rough idea of the ranges going into the flop. It's usually the case at all stages in a hand that the more accurately you can visualize both ranges, the more accurately you can play the hand. We're just trying to achieve reasonable poker-playing here (we just have to try to beat some soft live games), so I think a high-level outline is more than sufficient! I'll try to crank out a few more of these over the next couple weeks to complete the crash course (I'll optimistically aim for 5 in total); we will hopefully examine some actual hands at some point soon!
