@@ -4,6 +4,8 @@ date: 2026-02-02
 draft: false
 ---
 
+Disclaimer: I kinda just threw something together and haven't proofread or edited much yet, apologies for any typos or other mistakes.
+
 Our trip is fast approaching, and I've been slacking on the blog posts. I started thinking about what topic I wanted to cover next, and in the process came to the conclusion that a little bit of preflop knowledge is a crucial building block to the more advanced concepts. We talked a little bit about how ranges influence actions, and this is no less true in real hands. The gist of my advice here is unfortunately just that it's worth spending some time memorizing hand charts, which you can look at for free on GTOWizard (I suggest using the 500NL rake structure with GTO sizings and just clicking through the game tree). You don't need to get things perfectly correct (if you're getting close you have spent too long!), but understanding and being able to replicate the broad shape of the ranges is important - the rest of this blog post will attempt to shed some light on *why* the solver is doing what it is doing preflop, and how we can use this information to make simple and effective deviations.
 
 ---
