@@ -8,7 +8,7 @@ draft: false
 
 ---
 
-Our trip is fast approaching, and I've been slacking on the blog posts. I started thinking about what topic I wanted to cover next, and in the process came to the conclusion that a little bit of preflop knowledge is a crucial building block to the more advanced concepts. We talked a little bit about how ranges influence actions, and this is no less true in real hands. The gist of my advice here is unfortunately just that it's worth spending some time memorizing hand charts, which you can look at for free on GTOWizard (I suggest using the 500NL rake structure with GTO sizings and just clicking through the game tree). You don't need to get things perfectly correct (if you're getting close you have spent too long!), but understanding and being able to replicate the broad shape of the ranges is important - the rest of this blog post will attempt to shed some light on *why* the solver is doing what it is doing preflop, and how we can use this information to make simple and effective deviations.
+Our trip is fast approaching, and I've been slacking on the blog posts. I started thinking about what topic I wanted to cover next, and in the process came to the conclusion that a little bit of preflop knowledge is a crucial building block for the more advanced concepts. I wrote a little bit before about how ranges influence actions, and this is no less true in real hands. The gist of my advice here is unfortunately just that it's worth spending some time memorizing hand charts, which you can look at for free on GTOWizard (I suggest using the 500NL rake structure with GTO sizings and just clicking through the game tree). You don't need to get things perfectly correct (if you're getting close you have spent too long!), but understanding and being able to replicate the broad shape of the ranges is important - the rest of this blog post will attempt to shed some light on *why* the solver is doing what it is doing preflop, and how we can use this information to make simple and effective deviations.
 
 ---
 
@@ -66,7 +66,7 @@ So when you are OOP, you really want to cut down the SPR! We want to go as large
 
 Another fascinating thing that solvers taught us about poker! The BB 3b range is what we call **polar**, in that it contains a mixture of both very strong and very weak hands (along with some draws, which have mediocre equity right now but will often resolve to either very strong or very weak as the board runs out). So why is the BB 3b range so polar, whereas the SB vs BTN 3b range is so **linear**?
 
-We have another viable option that we didn't really have in previous positions, which is to call. We're getting a good price (because we already put 1BB in), and we're closing the action, both of which are important points. When we re-open the action by 3-betting, we give the opponent the chance to 4-bet us and put us in bluff-catching spots. We try to make this painful by 3-betting a mixture of really good hands that are almost "traps" in the sense that they are happy to face a 4-bet, and really terrible hands that were close to 0EV to begin with and don't give away as much equity by 3-betting and then having to fold. It's interesting to note that vs this polar BB 3b range, the BTN doesn't actually 4b that much, instead preferring to "play the bluff-catching node" in-position, with a larger SPR, and hoping to win more EV against the big-blind's bluffs. 
+We have another viable option that we didn't really have in previous positions, which is to call. We're getting a good price (because we already put 1BB in), and we're closing the action, both of which are important points. When we re-open the action by 3-betting, we give the opponent the chance to 4-bet us and put us in bluff-catching spots. We try to make this less painful by 3-betting a mixture of really good hands that are almost "traps" in the sense that they are happy to face a 4-bet, and really terrible hands that were close to 0 EV to begin with and don't give away as much equity by 3-betting and then having to fold. It's interesting to note that vs this polar BB 3b range, the BTN doesn't actually 4b that much, instead preferring to "play the bluff-catching node" in-position, with a larger SPR, and hoping to win more EV against the big-blind's bluffs. 
 
 ---
 
@@ -78,7 +78,7 @@ We have another viable option that we didn't really have in previous positions, 
 
 # Theoretical Preflop Deviations
 
-Non-GTO point: Whenever you are much better than your opponent, you should be more willing to open wider, call wider, and just go out of your way to play hands with them. Part of your EV is coming from them making horrible mistakes like betting the middle of their range or you being able to predict how they will act in indifferent bluff-catching spots.
+Non-GTO point: When you are much better than your opponent, you should be more willing to open wider, call wider, and just generally go out of your way to play hands with them. Part of your EV is coming from them making horrible mistakes like betting the middle of their range or you being able to predict how they will act in indifferent bluff-catching spots.
 
 I feel pretty strongly, though, that even somewhat reasonable players make lots of mistakes that are easily exploitable. As you study and improve at specific spots in the game tree, it's useful to cache your initial guesses of the correct strategy. I've found that pre-studying-me exhibits a lot of the same leaks and thought process errors as my opponents! Understanding the *why* of the solver outputs and being very aware of the most likely reasons for people to make mistakes makes it a lot easier to develop counter-strategies and print EV.
 
@@ -126,9 +126,9 @@ Problem 1: When you get 4b, you are very often dominated by a hand like AKo, and
 
 Problem 2: A lot of EV in poker revolves around making very strong hands and building very large pots with them. When you are in a 3b pot as HJ vs UTG, it's hard for AJo to make a very strong hand. When you hit an A on the flop, you have a decent hand! But a decent hand is worth much much less EV than a very good hand, because the size of the pot you are allowed to build is much smaller. You have to show some restraint, because once you start getting to all-in type potsizes you are isolating yourself against hands like AQ in the opponent's range, and your EV will start to plummet. Also, the opponent was already tight pre-flop, so their range won't contain enough worse hands like A8 to pay you off.
 
-Problem 3: You'll occasionally hit a straight for the nuts, but sometimes this will be shared, because the opponent will also often have an A or a J in their hand.
+Problem 3: You'll occasionally hit a straight for the nuts, but sometimes this will be shared, because the opponent will also often have an A or a J in their hand. Also, sometimes your opponent will hit a flush and you will lose a whole stack. (This is rare, but the main point is that it's already rare for you to hit the nuts, so making that even a little less good is a meaningful downside).
 
-It feels very unintuitive, but against most non-whale players it will be losing to 3b AJo from very early positions. I picked an extreme-seeming example to drive the point home (this will be fine from later positions), but I think this point is actually fairly important.
+It feels very unintuitive, but against most non-whale players it will be losing to 3b AJo from very early positions. I picked an extreme-seeming example to drive the point home (this hand would be perfectly fine from later positions), but I think this idea is actually fairly important.
 
 ---
 
